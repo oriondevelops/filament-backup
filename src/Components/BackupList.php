@@ -25,6 +25,7 @@ class BackupList extends Component implements HasActions, HasForms
 
     public $activeDisk;
 
+    #[Reactive]
     public array $disks;
 
     #[Reactive]
