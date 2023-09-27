@@ -45,7 +45,11 @@ class BackupList extends Component implements HasActions, HasForms
             ->link()
             ->visible($this->plugin()->isDownloadable())
             ->url(function (array $arguments) {
-                return route('download-backup', ['disk' => $this->activeDisk, 'path' => $arguments['path']]);
+                return route('download-backup', [
+                    'disk' => $this->activeDisk,
+                    'path' => $arguments['path'],
+                    'panel' => filament()->getCurrentPanel()?->getId(),
+                ]);
             });
     }
 
