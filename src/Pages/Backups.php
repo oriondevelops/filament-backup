@@ -63,8 +63,8 @@ class Backups extends Page
 
     public function updateBackupStatuses(): void
     {
-        Cache::remember('backup-statuses', now()->addSeconds(4), function () {
-            $backupStatuses = BackupDestinationStatusFactory::createForMonitorConfig(config('backup.monitor_backups'))
+        $backupStatuses = Cache::remember('backup-statuses', now()->addSeconds(4), function () {
+            return BackupDestinationStatusFactory::createForMonitorConfig(config('backup.monitor_backups'))
                 ->map(function (BackupDestinationStatus $backupDestinationStatus) {
                     return [
                         'name' => $backupDestinationStatus->backupDestination()->backupName(),
@@ -80,13 +80,13 @@ class Backups extends Page
                 })
                 ->values()
                 ->toArray();
-
-            if (! $this->activeDisk) {
-                $this->activeDisk = $backupStatuses[0]['disk'];
-            }
-
-            $this->backupStatuses = $backupStatuses;
         });
+
+        if (! $this->activeDisk) {
+            $this->activeDisk = $backupStatuses[0]['disk'];
+        }
+
+        $this->backupStatuses = $backupStatuses;
     }
 
     public function updateActiveDiskBackups(): void
