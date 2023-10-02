@@ -5,10 +5,13 @@ namespace Orion\FilamentBackup;
 use Closure;
 use Filament\Contracts\Plugin;
 use Filament\Panel;
+use Filament\Support\Concerns\EvaluatesClosures;
 use Orion\FilamentBackup\Pages\Backups;
 
 class BackupPlugin implements Plugin
 {
+    use EvaluatesClosures;
+
     protected bool | Closure $isHidden = false;
 
     protected bool | Closure $isVisible = true;
@@ -21,9 +24,15 @@ class BackupPlugin implements Plugin
 
     protected string $pollingInterval = '2s';
 
+    protected ?string $navigationLabel = null;
+
     protected ?string $navigationIcon = 'heroicon-o-server-stack';
 
     protected ?string $navigationGroup = null;
+
+    protected ?int $navigationSort = null;
+
+    protected ?string $slug = 'backups';
 
     protected string $page = Backups::class;
 
@@ -69,6 +78,13 @@ class BackupPlugin implements Plugin
         return $this;
     }
 
+    public function label(string $label = null): static
+    {
+        $this->navigationLabel = $label;
+
+        return $this;
+    }
+
     public function icon(string $icon = 'heroicon-o-server-stack'): static
     {
         $this->navigationIcon = $icon;
@@ -79,6 +95,20 @@ class BackupPlugin implements Plugin
     public function group(string $group = null): static
     {
         $this->navigationGroup = $group;
+
+        return $this;
+    }
+
+    public function sort(int $sort = null): static
+    {
+        $this->navigationSort = $sort;
+
+        return $this;
+    }
+
+    public function slug(string $slug = null): static
+    {
+        $this->slug = $slug;
 
         return $this;
     }
@@ -103,6 +133,11 @@ class BackupPlugin implements Plugin
         return $this->page;
     }
 
+    public function getLabel(): ?string
+    {
+        return $this->navigationLabel;
+    }
+
     public function getIcon(): ?string
     {
         return $this->navigationIcon;
@@ -111,6 +146,16 @@ class BackupPlugin implements Plugin
     public function getGroup(): ?string
     {
         return $this->navigationGroup;
+    }
+
+    public function getSort(): ?int
+    {
+        return $this->navigationSort;
+    }
+
+    public function getSlug(): string
+    {
+        return $this->slug;
     }
 
     public function pollingEnabled(): bool
@@ -150,15 +195,6 @@ class BackupPlugin implements Plugin
     public function getQueue(): ?string
     {
         return $this->queue;
-    }
-
-    public function evaluate($value)
-    {
-        if ($value instanceof \Closure) {
-            return app()->call($value);
-        }
-
-        return $value;
     }
 
     public function register(Panel $panel): void

@@ -85,7 +85,7 @@ class AdminPanelProvider extends PanelProvider
 }
 ```
 
-### Customizing the navigation icon and group
+### Customizing the navigation item
 
 ```php
 <?php
@@ -104,8 +104,11 @@ class AdminPanelProvider extends PanelProvider
             // ...
             ->plugin(
                 BackupPlugin::make()
+                    ->slug('my-precious-backups')
+                    ->label('Backups')
                     ->icon('heroicon-o-server-stack')
-                    ->group('System'),
+                    ->group('System')
+                    ->sort(3),
             );
     }
 }

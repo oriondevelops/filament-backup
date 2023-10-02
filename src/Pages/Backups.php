@@ -30,7 +30,7 @@ class Backups extends Page
 
     public static function getNavigationLabel(): string
     {
-        return __('Backups');
+        return BackupPlugin::get()->getLabel() ?? __('Backups');
     }
 
     public static function getNavigationIcon(): ?string
@@ -41,6 +41,16 @@ class Backups extends Page
     public static function getNavigationGroup(): ?string
     {
         return BackupPlugin::get()->getGroup();
+    }
+
+    public static function getNavigationSort(): ?int
+    {
+        return BackupPlugin::get()->getSort();
+    }
+
+    public static function getSlug(): string
+    {
+        return BackupPlugin::get()->getSlug();
     }
 
     public function getTitle(): string | Htmlable
