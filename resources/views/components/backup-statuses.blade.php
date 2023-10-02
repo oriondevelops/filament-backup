@@ -24,7 +24,7 @@
         </thead>
         <tbody class="whitespace-nowrap cursor-pointer dark:divide-white/5">
         @foreach($backupStatuses as $backupStatus)
-            <tr wire:key="{{ $backupStatus['disk'] }}">
+            <tr wire:key="{{ $backupStatus['disk'] }}-disk-status">
                 <td class="px-2 py-2 dark:border-gray-700 whitespace-nowrap cursor-pointer dark:bg-gray-900 group-hover:bg-gray-50 dark:group-hover:bg-gray-900">{{ __($backupStatus['name']) }}</td>
                 <td class="px-2 py-2 dark:border-gray-700 whitespace-nowrap cursor-pointer dark:bg-gray-900 group-hover:bg-gray-50 dark:group-hover:bg-gray-900">{{ __($backupStatus['disk']) }}</td>
                 <td class="px-2 py-2 dark:border-gray-700 whitespace-nowrap cursor-pointer dark:bg-gray-900 group-hover:bg-gray-50 dark:group-hover:bg-gray-900">
