@@ -16,6 +16,8 @@ The plugin lets you:
 
 Internally, it utilizes [spatie/laravel-backup](https://github.com/spatie/laravel-backup) to manage these backups.
 
+![screenshot](https://github.com/oriondevelops/filament-backup/assets/39307250/1b4c5c39-6154-4056-a625-47b9f1b188b0)
+
 ## Requirements
 
 Ensure that you meet the requirements for [spatie/laravel-backup](https://spatie.be/docs/laravel-backup/v8/requirements).
