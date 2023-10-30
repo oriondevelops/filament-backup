@@ -32,6 +32,8 @@ You can install the package via composer:
 composer require oriondevelops/filament-backup
 ```
 
+Next you should setup [a queue](https://laravel.com/docs/master/queues). Any driver is fine except the sync driver.
+
 ## Usage
 
 You need to register the plugin with your preferred Filament panel providers. This can be done inside of your `PanelProvider`, e.g. `AdminPanelProvider`.
